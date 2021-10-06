@@ -30,6 +30,7 @@
     "ethers": "^5.4.7",
     "hardhat": "^2.6.4",
     "postcss": "^8.3.9",
-    "tailwindcss": "^2.2.16"
+    "tailwindcss": "^2.2.16",
+    "electron-fetch": "1.7.4"
   }
 }

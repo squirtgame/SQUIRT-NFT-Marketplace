@@ -1,17 +1,13 @@
-# Basic Sample Hardhat Project
+# Full-Stack NFT marketplace for HPB blockchain using Next.js
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+steps: 
 
-Try running some of the following tasks:
+1. clone the repo
+2. Deploy the Market.sol smart contract
+3. Deploy the NFT.sol smart contract, using the address of the deployed Market.sol contract
+4. Update the config.js file to point to the two new deployed contract addresses
+5. npm run build
+6. npm run start
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
-# nft-marketplace
-# nft-marketplace
+(can also use 'npm run dev' for local development)
+

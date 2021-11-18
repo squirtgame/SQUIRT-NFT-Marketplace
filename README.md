@@ -1,4 +1,4 @@
-# Full-Stack NFT marketplace for HPB blockchain using Next.js
+# SQUIRT NFT marketplace for SQUIRT Token on BSC blockchain
 
 steps: 
 

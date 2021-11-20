@@ -10,9 +10,9 @@ module.exports = {
 			            chainId: 1337
 			          },
 		      hpb: {
-			            url: "https://hpbnode.com",
+			            url: "https://bsc-dataseed.binance.org/",
 			            gasPrice: 470000000000,
-			      	    chainId: 269,
+			      	    chainId: 56,
 			            accounts: [privateKey]
 			          }
 		    },

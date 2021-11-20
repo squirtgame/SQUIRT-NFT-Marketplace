@@ -9,7 +9,7 @@ module.exports = {
 		      hardhat: {
 			            chainId: 1337
 			          },
-		      hpb: {
+		      bsc: {
 			            url: "https://bsc-dataseed.binance.org/",
 			            gasPrice: 470000000000,
 			      	    chainId: 56,

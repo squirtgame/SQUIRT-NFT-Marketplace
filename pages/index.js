@@ -19,7 +19,7 @@ export default function Home() {
 		    }, [])
 	  async function loadNFTs() {
 		      /* create a generic provider and query for unsold market items */
-		      const provider = new ethers.providers.JsonRpcProvider('https://hpbnode.com')
+		      const provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed.binance.org/')
 		      const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
 		      const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
 		      const data = await marketContract.fetchMarketItems()
@@ -55,7 +55,7 @@ export default function Home() {
 		      const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
 
 		      /* user will be prompted to pay the asking proces to complete the transaction */
-		      const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')   
+		      const price = ethers.utils.parseUnits(nft.price.toString(), 'SQUIRT')   
 		      const transaction = await contract.createMarketSale(nftaddress, nft.tokenId, {
 			            value: price
 			          })
@@ -78,7 +78,7 @@ export default function Home() {
 							                  </div>
 							                </div>
 							                <div className="p-4 bg-black">
-							                  <p className="text-2xl mb-4 font-bold text-white">{nft.price} HPB</p>
+							                  <p className="text-2xl mb-4 font-bold text-white">{nft.price} SQUIRT</p>
 							                  <button className="w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
 							                </div>
 							              </div>

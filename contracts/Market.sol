@@ -1,8 +1,25 @@
+// SPDX-License-Identifier: MIT
+
 pragma solidity 0.8.4; 
 
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
+// ----------------------------------------------------------------------------
+// Imported SQUIRT Token Contract functions
+// ----------------------------------------------------------------------------
+
+abstract contract SQUIRT_Token {
+    function totalSupply() virtual external view returns (uint256);
+    function balanceOf(address account) virtual external view returns (uint256);
+    function allowance(address owner, address spender) virtual external view returns (uint256);
+    function transfer(address recipient, uint256 amount) virtual external returns (bool);
+    function approve(address spender, uint256 amount) virtual external returns (bool);
+    function transferFrom(address sender, address recipient, uint256 amount) virtual external returns (bool);
+}
+
+
 
 import "hardhat/console.sol";
 
@@ -10,13 +27,36 @@ contract NFTMarket is ReentrancyGuard {
   using Counters for Counters.Counter;
   Counters.Counter private _itemIds;
   Counters.Counter private _itemsSold;
+  
+  SQUIRT_Token public token;
+  
+  //////////////////////////////////////////////////////////////////////////////////
+  // address of the SQUIRT Token smart contract
+  address public tokenContractAddress = 0xd2d7289DB68395593D65101753Fec9450ddFB699;
+  //
+  //////////////////////////////////////////////////////////////////////////////////
+  
+  
 
   address payable owner;
-  uint256 listingPrice = 0.025 ether;
+  uint256 listingPrice = 1000; // SQUIRT tokens
 
   constructor() {
     owner = payable(msg.sender);
+    token = SQUIRT_Token(tokenContractAddress);
   }
+
+/*
+    function totalSupply() public override view returns (uint256) {
+    return totalSupply_;
+    }
+
+    function balanceOf(address tokenOwner) public override view returns (uint256) {
+        return balances[tokenOwner];
+    }
+
+*/
+
 
   struct MarketItem {
     uint itemId;
@@ -52,8 +92,9 @@ contract NFTMarket is ReentrancyGuard {
     uint256 price
   ) public payable nonReentrant {
     require(price > 0, "Price must be at least 1 wei");
-    require(msg.value == listingPrice, "Price must be equal to listing price");
-
+//    require(token.transfer == listingPrice, "Price must be equal to listing price");
+    require(token.transferFrom(msg.sender, address(this), 
+      listingPrice));
     _itemIds.increment();
     uint256 itemId = _itemIds.current();
 
@@ -82,14 +123,14 @@ contract NFTMarket is ReentrancyGuard {
 
   /* Creates the sale of a marketplace item */
   /* Transfers ownership of the item, as well as funds between parties */
-  function createMarketSale(
-    address nftContract,
-    uint256 itemId
-    ) public payable nonReentrant {
+  function createMarketSale(address nftContract, uint256 itemId) public payable nonReentrant {
     uint price = idToMarketItem[itemId].price;
     uint tokenId = idToMarketItem[itemId].tokenId;
-    require(msg.value == price, "Please submit the asking price in order to complete the purchase");
+//    require(msg.value == price, "Please submit the asking price in order to complete the purchase");
+    require(token.transferFrom(msg.sender, address(this), 
+      price));
 
+    token.transferFrom(address(this), msg.sender, tokenId);
     idToMarketItem[itemId].seller.transfer(msg.value);
     IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
     idToMarketItem[itemId].owner = payable(msg.sender);

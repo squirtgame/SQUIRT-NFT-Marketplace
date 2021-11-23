@@ -43,7 +43,7 @@ export default function CreateItem() {
 		      try {
 			            const added = await client.add(data)
 			            const url = `https://ipfs.infura.io/ipfs/${added.path}`
-			            /* after file is uploaded to IPFS, pass the URL to save it on BSC */
+			            /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
 			            createSale(url)
 			          } catch (error) {
 					        console.log('Error uploading file: ', error)
@@ -63,7 +63,7 @@ export default function CreateItem() {
 		      let event = tx.events[0]
 		      let value = event.args[2]
 		      let tokenId = value.toNumber()
-		      const price = ethers.utils.parseUnits(formInput.price, 'SQUIRT')
+		      const price = ethers.utils.parseUnits(formInput.price, 'ether')
 
 		      /* then list the item for sale on the marketplace */
 		      contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
@@ -89,7 +89,7 @@ export default function CreateItem() {
 		            onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
 		          />
 		          <input
-		            placeholder="Asset Price in SQUIRT"
+		            placeholder="Asset Price in BNB"
 		            className="mt-2 border rounded p-4"
 		            onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
 		          />

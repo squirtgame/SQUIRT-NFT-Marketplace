@@ -55,13 +55,45 @@ export default function Home() {
 		      const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
 
 		      /* user will be prompted to pay the asking proces to complete the transaction */
-		      const price = ethers.utils.parseUnits(nft.price.toString(), 'SQUIRT')   
+		      const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')   
 		      const transaction = await contract.createMarketSale(nftaddress, nft.tokenId, {
 			            value: price
 			          })
-		      await transaction.wait()
+					await transaction.wait()
+					
+
 		      loadNFTs()
-		    }
+				}
+
+		async function claimNft(nft) {
+		      /* needs the user to sign the transaction, so will use Web3Provider and sign it */
+		      const web3Modal = new Web3Modal()
+		      const connection = await web3Modal.connect()
+		      const provider = new ethers.providers.Web3Provider(connection)
+		      const signer = provider.getSigner()
+		      const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
+
+		      /* user will be prompted to pay the asking proces to complete the transaction */
+		      const price = ethers.utils.parseUnits('0.002'.toString(), 'ether')   
+		      const transaction = await contract.createMarketSale(nftaddress, nft.tokenId, {
+			            value: price
+			          })
+					await transaction.wait()
+					
+
+		      loadNFTs()
+				}
+				
+
+
+
+
+
+
+
+
+
+
 	  if (loadingState === 'loaded' && !nfts.length) return (<h1 className="px-20 py-10 text-3xl">No items in marketplace</h1>)
 	  return (
 		      <div className="flex justify-center">
@@ -78,14 +110,25 @@ export default function Home() {
 							                  </div>
 							                </div>
 							                <div className="p-4 bg-black">
-							                  <p className="text-2xl mb-4 font-bold text-white">{nft.price} SQUIRT</p>
+							                  <p className="text-2xl mb-4 font-bold text-white">{nft.price} BNB</p>
 							                  <button className="w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
 							                </div>
+							                <div className="p-4 bg-black">
+							                  <p className="text-2xl mb-4 font-bold text-white"></p>
+							                  <button className="w-full bg-red-500 text-white font-bold py-2 px-12 rounded" onClick={() => claimNft(nft)}>Owner Reclaim (0.002 BNB Fee)</button>
+							                </div>
+
+
+
 							              </div>
 							            ))
 				              }
 		          </div>
 		        </div>
 		      </div>
+
+					
+
+					
 		    )
 }

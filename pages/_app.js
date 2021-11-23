@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
 	  return (
 		      <div>
 		        <nav className="border-b p-6">
-		          <p className="text-4xl font-bold">SQUIRT NFT Marketplace for BSC - Connect using Metamask wallet set to BSC Network</p>
+		          <p className="text-4xl font-bold">SQUIRT NFT Marketplace - Connect to BSC via Metamask</p>
 		          <div className="flex mt-4">
 		            <Link href="/">
 		              <a className="mr-4 text-pink-500">
@@ -15,17 +15,17 @@ function MyApp({ Component, pageProps }) {
 		            </Link>
 		            <Link href="/create-item">
 		              <a className="mr-6 text-pink-500">
-		                Sell NFT Asset
+		                Create New NFT
 		              </a>
 		            </Link>
 		            <Link href="/my-assets">
 		              <a className="mr-6 text-pink-500">
-		                My Purchased NFT Assets
+		                Purchased NFT Assets
 		              </a>
 		            </Link>
 		            <Link href="/creator-dashboard">
 		              <a className="mr-6 text-pink-500">
-		                Creator NFT Dashboard
+		                Creator Dashboard
 		              </a>
 		            </Link>
 		          </div>

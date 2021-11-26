@@ -76,8 +76,8 @@ export default function CreateItem() {
 		    }
 
 	  return (
-		      <div className="flex justify-center">
-		        <div className="w-1/2 flex flex-col pb-12">
+		      <div className="flex justify-center bg-black h-screen">
+		        <div className="w-1/2 flex flex-col pb-12" style={{fontFamily:'gotham rounded,sans-serif'}}>
 		          <input 
 		            placeholder="Asset Name"
 		            className="mt-8 border rounded p-4"

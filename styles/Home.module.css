@@ -7,7 +7,9 @@
   align-items: center;
   height: 100vh;
 }
-
+.thisText{
+  font-family: 'gotham rounded,sans-serif';
+}
 .main {
   padding: 5rem 0;
   flex: 1;

@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
 		        <nav className="border-b p-6">
 				  <div className="flex flex-row justify-left">
 					<div><img src="squirt-game-logo.png" alt="logo" width="200" height="100" /></div>
-					<div><p className="text-4xl font-bold text-white p-6 thisText" style={{fontFamily:'gotham rounded,sans-serif'}}>SQUIRT NFT Marketplace </p></div>
+					<div><p className="text-4xl font-bold text-white p-6 thisText" style={{fontFamily:'gotham rounded,sans-serif'}}>NFT Marketplace </p></div>
 		          </div>
 				  <div className="flex mt-4"  style={{fontFamily:'gotham rounded,sans-serif'}}>
 		            <Link href="/">
